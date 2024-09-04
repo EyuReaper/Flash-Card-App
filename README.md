@@ -44,5 +44,5 @@ The Flashcard App is a web application designed to help users create, manage, an
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/flashcard-app.git
+git clone https://github.com/EyuReaper/Flash-Card-App.git
 cd flashcard-app
