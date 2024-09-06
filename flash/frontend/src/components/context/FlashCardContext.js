@@ -1,37 +1,32 @@
-import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-export const FlashcardContext = createContext();
-
-export const FlashcardProvider = ({ children }) => {
+const FlashCardContext = () => {
   const [flashcards, setFlashcards] = useState([]);
 
   useEffect(() => {
     const fetchFlashcards = async () => {
-      const response = await axios.get("http://localhost:5000/flashcards");
-      setFlashcards(response.data);
+      try {
+        const response = await axios.get("http://localhost:5000/flashcards"); // Ensure this URL is correct
+        setFlashcards(response.data);
+      } catch (error) {
+        console.error("Error fetching flashcards:", error);
+      }
     };
+
     fetchFlashcards();
   }, []);
 
-  const addFlashcard = async (flashcard) => {
-    const response = await axios.post(
-      "http://localhost:5000/flashcards",
-      flashcard
-    );
-    setFlashcards([...flashcards, response.data]);
-  };
-
-  const deleteFlashcard = async (id) => {
-    await axios.delete(`http://localhost:5000/flashcards/${id}`);
-    setFlashcards(flashcards.filter((flashcard) => flashcard._id !== id));
-  };
-
   return (
-    <FlashcardContext.Provider
-      value={{ flashcards, addFlashcard, deleteFlashcard }}
-    >
-      {children}
-    </FlashcardContext.Provider>
+    <div>
+      {flashcards.map((card) => (
+        <div key={card.id}>
+          <h3>{card.question}</h3>
+          <p>{card.answer}</p>
+        </div>
+      ))}
+    </div>
   );
 };
+
+export default FlashCardContext;
