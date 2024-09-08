@@ -9,6 +9,25 @@
 </head>
 
 <body>
+  <h1>Custom Flashcard</h1>
+  <div class="flashcard-form">
+    <label for="face">Face <input type="text" id="face" v-model="newFace"></label>
+    <label for="back">Back <input type="text" id="back" v-model="newBack"></label>
+    <button v-on:click="addCard"><i class="fa-solid fa-plus" style="color: #Ffffff;">+</i>Add Card</button>
+    <span v-show="error" class="error">Oops! a flash card needs to a face and back.</span>
+  </div>
+
+  <ul class="flashcard-list">
+    <li v-on:click="toggleCard(card)" v-for="(card, index) in cards">
+      <transition name="flip">
+        <p v-bind:key="card.flipped" class="card">
+          {{card.flipped ? card.back :card.face}}
+          <span v-on:click="cards.splice(index, 1)" class="delete-card">X</span>
+        </p>
+
+      </transition>
+    </li>
+  </ul>
   <div id="root"></div> <!-- React will render the app here -->
   <script src="/frontend/src/index.js"></script> <!-- Reference to the bundled file -->
 </body>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { FlashcardContext } from "../context/FlashCardContext";
+import FlashcardContext from "../context/FlashCardContext";
 
 const AddFlashcard = () => {
   const { addFlashcard } = useContext(FlashcardContext);
