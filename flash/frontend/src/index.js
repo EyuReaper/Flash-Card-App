@@ -1,3 +1,4 @@
+//another entrypoint that imports components and any global styles through id= root in index.html
 import React from "react";
 import ReactDOM from "react-dom/client"; //updated the import by adding client
 import App from "./App";
