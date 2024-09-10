@@ -1,32 +1,39 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+// this file provides the context and provider for managing flashcards
+import React, { createContext, useContext, useState } from "react";
 
-const FlashCardContext = () => {
-  const [flashcards, setFlashcards] = useState([]);
+const FlashCardContext = createContext(); // shares states across components
 
-  useEffect(() => {
-    const fetchFlashcards = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/flashcards"); // Ensure this URL is correct
-        setFlashcards(response.data);
-      } catch (error) {
-        console.error("Error fetching flashcards:", error);
-      }
-    };
-
-    fetchFlashcards();
-  }, []);
+export const FlashcardProvider = ({ children }) => {
+  const [cards, setCards] = useState([
+    {
+      front: 'The "First Computer Programmer"',
+      back: "Ada Lovelace",
+      flipped: false,
+    },
+    {
+      front: 'Invented the "Clarke Calculator"',
+      back: "Edith Clarke",
+      flipped: false,
+    },
+    {
+      front: "Famous World War II Enigma code breaker",
+      back: "Alan Turing",
+      flipped: false,
+    },
+    {
+      front: "Created satellite orbit analyzation software for NASA",
+      back: "Dr. Evelyn Boyd Granville",
+      flipped: false,
+    },
+  ]);
 
   return (
-    <div>
-      {flashcards.map((card) => (
-        <div key={card.id}>
-          <h3>{card.question}</h3>
-          <p>{card.answer}</p>
-        </div>
-      ))}
-    </div>
+    <FlashCardContext.Provider value={{ cards, setCards }}>
+      {children}
+    </FlashCardContext.Provider>
   );
 };
 
-export default FlashCardContext;
+export const useFlashcards = () => {
+  return useContext(FlashCardContext);
+};

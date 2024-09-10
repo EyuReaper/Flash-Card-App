@@ -1,16 +1,16 @@
+//this is the main application component that ties everything together
 import React from "react";
 import { FlashcardProvider } from "./components/context/FlashCardContext";
-import FlashcardList from "./components/flashcards/FlashCardList";
-import AddFlashcard from "./components/flashcards/AddFlashCard";
-import "./styles/App.css";
+import FlashCardList from "./components/flashcards/FlashCardList";
+import AddFlashCard from "./components/flashcards/AddFlashCard";
 
 const App = () => {
   return (
     <FlashcardProvider>
-      <div className="app">
-        <h1>Flashcard App</h1>
-        <AddFlashcard />
-        <FlashcardList />
+      <div id="app">
+        <h1>Custom Flashcard</h1>
+        <AddFlashCard />
+        <FlashCardList />
       </div>
     </FlashcardProvider>
   );

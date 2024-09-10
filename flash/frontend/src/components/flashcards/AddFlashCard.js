@@ -1,38 +1,54 @@
-import React, { useState, useContext } from "react";
-import FlashcardContext from "../context/FlashCardContext";
+//this file provides for adding new flashcard to the UI
+import React, { useState } from "react";
+import { useFlashcards } from "../context/FlashCardContext";
 
-const AddFlashcard = () => {
-  const { addFlashcard } = useContext(FlashcardContext);
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+const AddFlashCard = () => {
+  const { setCards } = useFlashcards();
+  const [newFront, setNewFront] = useState("");
+  const [newBack, setNewBack] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const newFlashcard = { question, answer };
-    await addFlashcard(newFlashcard);
-    setQuestion("");
-    setAnswer("");
+  const addNew = () => {
+    if (!newFront || !newBack) {
+      setError(true);
+    } else {
+      setCards((prevCards) => [
+        ...prevCards,
+        { front: newFront, back: newBack, flipped: false },
+      ]);
+      setNewFront("");
+      setNewBack("");
+      setError(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Question"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Answer"
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-        required
-      />
-      <button type="submit">Add Flashcard</button>
-    </form>
+    <div className="flashcard-form">
+      <label htmlFor="front">
+        Front
+        <input
+          value={newFront}
+          onChange={(e) => setNewFront(e.target.value)}
+          type="text"
+          id="front"
+        />
+      </label>
+      <label htmlFor="back">
+        Back
+        <input
+          value={newBack}
+          onChange={(e) => setNewBack(e.target.value)}
+          onKeyPress={(e) => e.key === "Enter" && addNew()}
+          type="text"
+          id="back"
+        />
+      </label>
+      <button onClick={addNew}>Add a New Card</button>
+      {error && (
+        <span className="error">Oops! Flashcards need a front and a back.</span>
+      )}
+    </div>
   );
 };
 
-export default AddFlashcard;
+export default AddFlashCard;

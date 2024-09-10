@@ -1,22 +1,34 @@
+// this component displays the list of cards
 import React from "react";
+import { useFlashcards } from "../context/FlashCardContext";
 
-// eslint-disable-next-line no-unused-vars
-const flashcards = []; // Example usage if you need to keep it
-const FlashCardList = ({ flashcards }) => {
-  // Check if flashcards is defined and has items
-  if (!flashcards || flashcards.length === 0) {
-    return <div>No flashcards available.</div>; // Handle empty state
-  }
+const FlashCardList = () => {
+  const { cards, setCards } = useFlashcards();
+
+  const toggleCard = (index) => {
+    const updatedCards = [...cards];
+    updatedCards[index].flipped = !updatedCards[index].flipped;
+    setCards(updatedCards);
+  };
+
+  const deleteCard = (index) => {
+    const updatedCards = cards.filter((_, cardIndex) => cardIndex !== index);
+    setCards(updatedCards);
+  };
 
   return (
-    <div>
-      {flashcards.map((card) => (
-        <div key={card.id}>
-          <h3>{card.question}</h3>
-          <p>{card.answer}</p>
-        </div>
+    <ul className="flashcard-list">
+      {cards.map((card, index) => (
+        <li key={index} onClick={() => toggleCard(index)}>
+          <p className="card">
+            {card.flipped ? card.back : card.front}
+            <span onClick={() => deleteCard(index)} className="delete-card">
+              X
+            </span>
+          </p>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
