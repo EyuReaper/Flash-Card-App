@@ -22,7 +22,13 @@ const FlashCardList = () => {
         <li key={index} onClick={() => toggleCard(index)}>
           <p className="card">
             {card.flipped ? card.back : card.front}
-            <span onClick={() => deleteCard(index)} className="delete-card">
+            <span
+              onClick={(e) => {
+                e.stopPropagation(); // deletes the the card when pressing the X button
+                deleteCard(index);
+              }}
+              className="delete-card"
+            >
               X
             </span>
           </p>
@@ -31,5 +37,5 @@ const FlashCardList = () => {
     </ul>
   );
 };
-
+//e.stopPropagation() deletes card
 export default FlashCardList;
