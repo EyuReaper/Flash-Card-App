@@ -1,52 +1,54 @@
-//this file provides for adding new flashcard to the UI
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFlashcards } from "../context/FlashCardContext";
 
 const AddFlashCard = () => {
-  const { setCards } = useFlashcards();
-  const [newFront, setNewFront] = useState("");
-  const [newBack, setNewBack] = useState("");
-  const [error, setError] = useState(false);
+  const { cards, setCards } = useFlashcards();
+  const [front, setFront] = useState("");
+  const [back, setBack] = useState("");
+  const [color, setColor] = useState("#51aae5"); // Default color
 
-  const addNew = () => {
-    if (!newFront || !newBack) {
-      setError(true);
-    } else {
-      setCards((prevCards) => [
-        ...prevCards,
-        { front: newFront, back: newBack, flipped: false },
-      ]);
-      setNewFront("");
-      setNewBack("");
-      setError(false);
+  const handleAddCard = () => {
+    if (front && back) {
+      const newCard = {
+        front,
+        back,
+        flipped: false,
+        color, // Use the selected color
+      };
+      setCards([...cards, newCard]); // Add the new card to the existing cards
+      setFront(""); // Clear input
+      setBack(""); // Clear input
     }
   };
 
   return (
-    <div className="flashcard-form">
-      <label htmlFor="front">
-        Front
+    <div>
+      <h2>Add a New Flashcard</h2>
+      <input
+        type="text"
+        value={front}
+        onChange={(e) => setFront(e.target.value)}
+        placeholder="Front"
+        required
+      />
+      <input
+        type="text"
+        value={back}
+        onChange={(e) => setBack(e.target.value)}
+        placeholder="Back"
+        required
+      />
+      <div className="color-input">
+        <FontAwesomeIcon icon="fa-solid fa-palette" />
         <input
-          value={newFront}
-          onChange={(e) => setNewFront(e.target.value)}
-          type="text"
-          id="front"
+          type="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
         />
-      </label>
-      <label htmlFor="back">
-        Back
-        <input
-          value={newBack}
-          onChange={(e) => setNewBack(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && addNew()}
-          type="text"
-          id="back"
-        />
-      </label>
-      <button onClick={addNew}>Add a New Card</button>
-      {error && (
-        <span className="error">Oops! Flashcards need a front and a back.</span>
-      )}
+      </div>
+
+      <button onClick={handleAddCard}>Add Card</button>
     </div>
   );
 };

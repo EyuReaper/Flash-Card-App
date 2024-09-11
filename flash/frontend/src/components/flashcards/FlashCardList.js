@@ -20,7 +20,10 @@ const FlashCardList = () => {
     <ul className="flashcard-list">
       {cards.map((card, index) => (
         <li key={index} onClick={() => toggleCard(index)}>
-          <p className="card">
+          <p
+            className={"card" + (card.flipped ? "flipped" : "")}
+            style={{ backgroundColor: card.color }} //sets the cards background color dynamically
+          >
             {card.flipped ? card.back : card.front}
             <span
               onClick={(e) => {
