@@ -7,11 +7,12 @@ ul {
   padding-left: 0;
   display: flex;
   flex-flow: row wrap;
+  justify-content: center; /* Center the items */
 }
 
 li {
   list-style-type: none;
-  padding: 10px 10px;
+  padding: 10px;
   transition: all 0.3s ease;
 }
 
@@ -37,9 +38,11 @@ li {
   box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
   transition: transform 0.6s ease;
 }
+
 .card.flipped {
   transform: rotateY(180deg);
 }
+
 li:hover {
   transform: scale(1.1);
 }
@@ -75,6 +78,7 @@ input {
   padding: 10px;
   outline: none;
 }
+
 .color-input {
   display: inline-flex;
   align-items: center;
@@ -89,6 +93,7 @@ input {
   width: 40px;
   cursor: pointer;
 }
+
 button {
   border-radius: 5px;
   border: 1px solid #87cb84;
@@ -111,4 +116,41 @@ button:hover {
   display: block;
   color: #e44e42;
   font-weight: 600;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    width: 120px; /* Adjust card size */
+    height: 150px;
+    padding: 60px 30px; /* Adjust padding */
+    font-size: 18px; /* Adjust font size */
+  }
+
+  button {
+    padding: 6px 12px; /* Adjust button padding */
+    font-size: 12px; /* Adjust font size */
+  }
+
+  input {
+    padding: 8px; /* Adjust input padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100px; /* Further adjust card size */
+    height: 130px;
+    padding: 40px 20px; /* Further adjust padding */
+    font-size: 16px; /* Further adjust font size */
+  }
+
+  button {
+    padding: 5px 10px; /* Further adjust button padding */
+    font-size: 10px; /* Further adjust font size */
+  }
+
+  ul {
+    flex-direction: column; /* Stack cards vertically on small screens */
+  }
 }
