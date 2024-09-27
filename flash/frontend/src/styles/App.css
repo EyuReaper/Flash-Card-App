@@ -118,7 +118,9 @@ input {
   padding: 10px;
   outline: none;
 }
-
+input:focus {
+  border: 2px solid #87cb84;
+}
 .color-input {
   display: inline-flex;
   align-items: center;
@@ -193,4 +195,13 @@ button:hover {
   ul {
     flex-direction: column; /* Stack cards vertically on small screens */
   }
+}
+#header {
+  background-color: rgb(32, 30, 30);
+  color: white;
+  text-align: center;
+  padding: 5px 0 5px 0;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
 }

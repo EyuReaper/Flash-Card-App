@@ -1,59 +1,49 @@
-// AddList.js
+// src/components/flashcards/AddList.js
 import React, { useState } from "react";
+import { useFlashcards } from "../context/FlashCardContext"; // Adjust path as necessary
 
-const AddList = ({ cards }) => {
-  const [filterCategory, setFilterCategory] = useState("");
-  const [newCategory, setNewCategory] = useState(""); // State for new category
-  const [cardList, setCardList] = useState(cards); // State for managing card list
+const AddList = () => {
+  const { cards } = useFlashcards(); // Get cards from the context
+  const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
 
-  const handleAddCategory = () => {
-    if (
-      newCategory &&
-      !cardList.some((card) => card.category === newCategory)
-    ) {
-      // Add a new category to the card list (example structure)
-      const newCards = [
-        ...cardList,
-        { category: newCategory }, // Example card data
-      ];
-      setCardList(newCards);
-      setNewCategory(""); // Clear input
-    }
-  };
-
-  const filteredCards = filterCategory
-    ? cardList.filter(
-        (card) => card.category.toLowerCase() === filterCategory.toLowerCase()
-      )
-    : cardList;
-
-  const categories = Array.from(new Set(cardList.map((card) => card.category))); // Get unique categories
+  // Get unique categories
+  const categories = Array.from(new Set(cards.map((card) => card.category)));
 
   return (
     <div className="add-list">
       <h2>Card List</h2>
-      <input
-        type="text"
-        placeholder="Filter by category"
-        value={filterCategory}
-        onChange={(e) => setFilterCategory(e.target.value)}
-      />
-      {/* Input for new category */}
-      <input
-        type="text"
-        placeholder="Add new category"
-        value={newCategory}
-        onChange={(e) => setNewCategory(e.target.value)}
-      />
-      <button onClick={handleAddCategory}>Add Category</button>{" "}
-      {/* Add Button */}
+
+      {/* Dropdown for selecting a category */}
+      <select
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+
+      <button
+        onClick={() => {
+          if (selectedCategory) {
+            alert(`Selected category: "${selectedCategory}"`); // Placeholder for actual implementation
+            setSelectedCategory(""); // Clear selection after use
+          }
+        }}
+      >
+        Add to Selected Category
+      </button>
+
       {categories.length > 0 ? (
         <ul>
           {categories.map((category) => (
             <li key={category}>
               <h3>{category}</h3>
               <ul>
-                {filteredCards
+                {cards
                   .filter((card) => card.category === category)
                   .sort((a, b) => a.front.localeCompare(b.front)) // Sort by front title
                   .map((card, index) => (
@@ -68,7 +58,8 @@ const AddList = ({ cards }) => {
       ) : (
         <p>No categories available.</p>
       )}
-      {filteredCards.length === 0 && <p>No cards found for this category.</p>}
+
+      {cards.length === 0 && <p>No cards found for this category.</p>}
     </div>
   );
 };

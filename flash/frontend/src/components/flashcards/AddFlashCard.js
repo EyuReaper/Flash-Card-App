@@ -3,19 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useFlashcards } from "../context/FlashCardContext";
 
 const AddFlashCard = () => {
+  const [category, setCategory] = useState("");
   const { cards, setCards } = useFlashcards();
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
   const [color, setColor] = useState("#51aae5"); // Default color
 
-  const handleAddCard = () => {
-    if (front && back) {
+  const handleAddCard = (e) => {
+    e.preventDefault();
+    if (category && front && back) {
       const newCard = {
+        category,
         front,
         back,
         flipped: false,
         color, // Use the selected color
       };
+      setCategory("");
       setCards([...cards, newCard]); // Add the new card to the existing cards
       setFront(""); // Clear input
       setBack(""); // Clear input
@@ -25,6 +29,13 @@ const AddFlashCard = () => {
   return (
     <div>
       <h2>Add a New Flashcard</h2>
+      <input
+        type="text"
+        placeholder="Category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
+      />
       <input
         type="text"
         value={front}

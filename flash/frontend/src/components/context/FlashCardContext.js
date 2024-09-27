@@ -6,9 +6,12 @@ export const FlashcardContext = createContext(); // Ensure this is defined
 
 export const FlashcardProvider = ({ children }) => {
   const [cards, setCards] = useState([]); // Initialize state for cards
-
+  const addCard = (category, front, back) => {
+    const newCard = { category, front, back };
+    setCards((prevCards) => [...prevCards, newCard]);
+  };
   return (
-    <FlashcardContext.Provider value={{ cards, setCards }}>
+    <FlashcardContext.Provider value={{ cards, setCards, addCard }}>
       {children} {/* Render children within the provider */}
     </FlashcardContext.Provider>
   );

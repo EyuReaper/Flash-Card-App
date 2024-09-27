@@ -9,11 +9,13 @@ const App = () => {
   return (
     <FlashcardProvider>
       <div id="app">
-        <h1>Custom Flashcard</h1>
-        <AddFlashCard />
+        <div id="header">
+          <h1>Custom Flashcard</h1>
+          <AddFlashCard />
+        </div>
         <FlashCardList />
         <ErrorBoundary>
-          <ParentComponent /> {/* Consider if AddList should be here */}
+          <ParentComponent />
         </ErrorBoundary>
       </div>
     </FlashcardProvider>
