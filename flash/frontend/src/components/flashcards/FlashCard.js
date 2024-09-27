@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import "./style/App.css";
+import AddList from "./components/flashcards/AddList";
 
 const initialCards = [
   {
     front: 'The "First Computer Programmer"',
     back: "Ada Lovelace",
-    flipped: false,
+    category: "Programming",
   },
   {
     front: 'Invented the "Clarke Calculator"',
     back: "Edith Clarke",
-    flipped: false,
   },
   {
     front: "Famous World War II Enigma code breaker",
     back: "Alan Turing",
-    flipped: false,
   },
   {
     front: "Created satellite orbit analyzation software for NASA",
     back: "Dr. Evelyn Boyd Granville",
-    flipped: false,
   },
 ];
 
@@ -28,25 +26,29 @@ const FlashCardApp = () => {
   const [cards, setCards] = useState(initialCards);
   const [newFront, setNewFront] = useState("");
   const [newBack, setNewBack] = useState("");
+  const [newCategory, setNewCategory] = useState("");
   const [error, setError] = useState(false);
 
   const toggleCard = (index) => {
     const updatedCards = [...cards];
-    updatedCards[index].flipped = !updatedCards[index].flipped;
+    updatedCards[index].flipped = !updatedCards[index].flipped; // Toggle flipped state
     setCards(updatedCards);
   };
 
   const addNew = () => {
-    if (!newFront || !newBack) {
+    if (!newFront.trim() || !newBack.trim() || !newCategory.trim()) {
       setError(true);
     } else {
-      setCards([...cards, { front: newFront, back: newBack, flipped: false }]);
+      setCards([
+        ...cards,
+        { front: newFront, back: newBack, category: newCategory },
+      ]);
       setNewFront("");
       setNewBack("");
+      setNewCategory(""); // Reset category input
       setError(false);
     }
   };
-
   const deleteCard = (index) => {
     const updatedCards = cards.filter((_, cardIndex) => cardIndex !== index);
     setCards(updatedCards);
@@ -55,6 +57,8 @@ const FlashCardApp = () => {
   return (
     <div id="flashcard-app" className="container">
       <h1>Custom Flashcard</h1>
+
+      <AddList cards={cards} />
 
       <div className="flashcard-form">
         <label htmlFor="front">
@@ -87,12 +91,34 @@ const FlashCardApp = () => {
       <ul className="flashcard-list">
         {cards.map((card, index) => (
           <li key={index} onClick={() => toggleCard(index)}>
-            <p className="card">
-              {card.flipped ? card.back : card.front}
-              <span onClick={() => deleteCard(index)} className="delete-card">
-                X
-              </span>
-            </p>
+            <div className={`card ${card.flipped ? "flipped" : ""}`}>
+              <div className="card-inner">
+                <div className="card-front">
+                  {card.front}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteCard(index);
+                    }}
+                    className="delete-card"
+                  >
+                    X
+                  </span>
+                </div>
+                <div className="card-back">
+                  {card.back}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteCard(index);
+                    }}
+                    className="delete-card"
+                  >
+                    X
+                  </span>
+                </div>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
