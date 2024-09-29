@@ -8,7 +8,7 @@ const AddFlashCard = () => {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
   const [color, setColor] = useState("#51aae5"); // Default color
-
+  const [errorMessage, setErrorMessage] = useState("");
   const handleAddCard = (e) => {
     e.preventDefault();
     if (category && front && back) {
@@ -23,6 +23,9 @@ const AddFlashCard = () => {
       setCards([...cards, newCard]); // Add the new card to the existing cards
       setFront(""); // Clear input
       setBack(""); // Clear input
+      setErrorMessage(""); //clears error message if added in the input field
+    } else {
+      setErrorMessage("Please fill in all fields"); //error message to be displayed
     }
   };
 
@@ -60,6 +63,7 @@ const AddFlashCard = () => {
       </div>
 
       <button onClick={handleAddCard}>Add Card</button>
+      {errorMessage && <p className="error">{errorMessage}</p>}
     </div>
   );
 };
