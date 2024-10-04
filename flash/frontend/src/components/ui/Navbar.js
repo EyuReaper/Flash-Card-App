@@ -14,10 +14,9 @@ const Navbar = () => {
         className="logo"
       />
       <ul className="nav-list">
-        <li className="nav-item">home</li>
+        <li className="nav-item">Home</li>
         <li className="nav-item">features</li>
-        <li className="nav-item">blogs</li>
-        <li className="nav-item">shop</li>
+        <li className="nav-item">About</li>
       </ul>
 
       <div className="button-group">

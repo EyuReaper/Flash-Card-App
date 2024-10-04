@@ -1,0 +1,84 @@
+/* ResponsiveFooter.css */
+
+.footer {
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Adjusted for rounded corners */
+  width: 100%;
+  padding: 24px; /* Equivalent to p-6 */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 32px; /* sm:px-32 */
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-size: 0.9rem; /* Adjusted size */
+  color: #333; /* text-text */
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #87cb84; /* primary color */
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333; /* text-text */
+}
+
+.social-icon {
+  font-size: 1.3rem; /* Adjusted size */
+  padding: 1.5rem;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: white;
+  background-color: #87cb84; /* primary color */
+}
+
+.footer-bottom {
+  border-top: 1px solid #eaeaea; /* border-gray-200 */
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-text {
+  font-size: 0.8rem; /* Adjusted size */
+  color: #666; /* text-gray-600 */
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .footer-text {
+    font-size: 0.9rem; /* sm:text-[0.9rem] */
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer {
+    padding: 36px; /* lg:p-9 */
+  }
+}
