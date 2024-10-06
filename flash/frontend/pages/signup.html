@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../src/styles/Styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="input-container">
+        <h2>Sign Up</h2>
+        <form id="signupform">
+            <div class="input-group">
+                <label class="input-label">
+                    <span class="input-placeholder">Full Name</span>
+                    <input type="text" id="fullname" name="fullname" class="input-field" placeholder="Enter a fullname"
+                        required>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    <span class="input-placeholder">Email</span>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="Enter an email"
+                        required>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label class="input-label">
+                    <span class="input-placeholder">Username</span>
+                    <input type="text" id="username" name="username" class="input-field" placeholder="Enter a username"
+                        required>
+                </label>
+            </div>
+
+            <div class="input-group password-container">
+                <label for="password" class="password-label">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="password-input"
+                    oninput="handleStrongPasswordChecker(event)" />
+                <span class="toggle-eye" onclick="toggleEye()">
+                    <i class="fa-regular fa-eye-slash"></i>
+                </span>
+
+                <div class="strength-indicators">
+                    <div class="indicator lowercase"></div>
+                    <div class="indicator uppercase"></div>
+                    <div class="indicator number"></div>
+                    <div class="indicator symbol"></div>
+                    <div class="indicator length"></div>
+                </div>
+            </div>
+
+            <button class="custombtn" type="submit">
+                Sign Up
+            </button>
+        </form>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
