@@ -1,53 +1,39 @@
-/* Navbar.css */
-
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  padding: 8px 10px;
-  position: relative;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  width: 50px; /* Adjust logo size */
-  height: auto;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e90ff; /* Blue color to match "ZLU" logo */
 }
 
 .nav-list {
   display: flex;
+  list-style: none;
   gap: 20px;
-  list-style-type: none;
-  padding-left: 0;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-item {
-  position: relative;
-  cursor: pointer;
-  padding: 10px;
-  transition: all 0.3s ease;
+.nav-item a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
 }
 
-.nav-item:hover {
-  color: #87cb84; /* Hover color */
+.nav-item a:hover {
+  color: #1e90ff;
 }
 
-.nav-item::before {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #87cb84; /* Primary color */
-  transition: width 0.3s ease;
-}
-
-.nav-item:hover::before {
-  width: 100%;
+.nav-item.active a {
+  color: #1e90ff;
+  font-weight: bold;
 }
 
 .button-group {
@@ -57,76 +43,129 @@
 }
 
 .button {
-  padding: 7px 16px;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: white;
-  background-color: #87cb84;
-  transition: all 0.3s ease;
+  padding: 8px 16px;
   border: none;
+  border-radius: 5px;
+  background-color: #28a745; /* Green to match screenshot */
+  color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.signup {
-  background-color: #70a66f; /* Different background for sign up */
-}
-
-.button:hover {
-  background-color: #70a66f;
+.button.signup {
+  background-color: #28a745; /* Same green for consistency */
 }
 
 .menu-icon {
-  font-size: 1.8rem; /* Adjust icon size */
+  display: none;
   cursor: pointer;
 }
 
+.menu-icon svg,
+.close-icon svg,
+.search-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .sidebar {
-  position: absolute;
-  top: 65px;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+}
+
+.sidebar.open {
   right: 0;
-  width: 100%;
-  background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 16px;
-  text-align: center;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.open {
-  transform: translateX(0);
-  opacity: 1;
-  z-index: 20;
+.sidebar.closed {
+  right: -250px;
 }
 
-.closed {
-  transform: translateX(200px);
-  opacity: 0;
-  z-index: -1;
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.close-icon {
+  cursor: pointer;
+  color: #333;
 }
 
 .search-container {
-  position: relative;
-  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
 }
 
 .search-input {
-  padding: 1.5rem 4rem 1.5rem 10px; /* Adjust padding */
-  border-radius: 5px;
-  border: 2px solid #eaeaea;
+  flex: 1;
+  padding: 8px;
+  border: none;
   outline: none;
-  width: 100%;
-}
-
-.search-input:focus {
-  border: 2px solid #87cb84; /* Focus border color */
+  font-size: 16px;
 }
 
 .search-icon {
-  position: absolute;
-  top: 8px;
-  left: 3px;
-  color: gray;
-  font-size: 1.3rem;
+  margin-left: 10px;
+}
+
+.sidebar-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.sidebar-nav-item {
+  padding: 10px 15px;
+}
+
+.sidebar-nav-item a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.sidebar-nav-item a:hover {
+  color: #1e90ff;
+}
+
+.sidebar-nav-item a.active {
+  color: #1e90ff;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none;
+  }
+
+  .button-group .button {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .sidebar .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .sidebar .button {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -1,0 +1,33 @@
+/* src/components/flashcards/AddList.css */
+.add-list-container {
+    display: flex; /* Use flexbox for layout */
+  }
+  
+  .toggle-sidebar {
+    margin: 20px;
+    cursor: pointer;
+  }
+  
+  .sidebar {
+    width: 300px; /* Set a width for the sidebar */
+    padding: 20px;
+    background-color: #f4f4f4; /* Background color for the sidebar */
+    border-right: 1px solid #ccc; /* Optional border for separation */
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+  }
+  
+  .sidebar button {
+    margin-bottom: 10px; /* Add space between elements */
+  }
+  
+  .sidebar ul {
+    list-style-type: none; /* Remove default list styles */
+    padding-left: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 5px; /* Space between list items */
+  }

@@ -197,7 +197,8 @@ button:hover {
     flex-direction: column; /* Stack cards vertically on small screens */
   }
 }
-#header {
+
+***#header {
   background-color: rgb(32, 30, 30);
   color: white;
   text-align: center;
@@ -206,4 +207,101 @@ button:hover {
   border-radius: 10px;
   box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
   top: 0;
+}
+
+.add-flashcard {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.add-flashcard h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.color-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.palette-icon {
+  font-size: 20px;
+  color: #333;
+}
+
+.color-input input {
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.add-flashcard button {
+  padding: 10px 20px;
+  background-color: #28a745; /* Green to match screenshot */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-flashcard button:hover {
+  background-color: #218838;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-flashcard {
+    padding: 15px;
+  }
+
+  .add-flashcard h2 {
+    font-size: 20px;
+  }
+
+  .form-group input {
+    font-size: 14px;
+  }
+
+  .add-flashcard button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }

@@ -41,3 +41,45 @@ function updateIndicator(selector, isValid) {
     indicator.classList.remove("active"); // Remove active class for invalid indicators
   }
 }
+
+//signup form script
+document
+  .getElementById("signupform")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      alert("Signup successful!");
+    } else {
+      alert("Error: " + data.message);
+    }
+  });
+
+//login form script
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Basic validation (you can expand this)
+    if (username === "" || password === "") {
+      alert("Please enter both username and password.");
+      return;
+    }
+
+    alert("Login successful!"); // Placeholder for successful login
+  });
